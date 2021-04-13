@@ -2,7 +2,8 @@ package com.lipeng.consumerdemo.config;
 
 import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.common.utils.ConfigUtils;
+import org.apache.dubbo.common.config.ConfigurationUtils;
+import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.config.RegistryConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -38,9 +39,11 @@ public class DubboConfig {
         log.info("[SpringBootShutdownHook] Register ShutdownHook....");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
-                int timeOut = Integer.parseInt(ConfigUtils.getProperty("dubbo.service.shutdown.wait", "2000"));
+                System.setProperty(CommonConstants.SHUTDOWN_WAIT_KEY, "8000");
+                int timeOut = ConfigurationUtils.getServerShutdownTimeout();
                 log.info("[SpringBootShutdownHook] Application need sleep {} seconds to wait Dubbo shutdown", (double) timeOut / 1000.0D);
                 Thread.sleep(timeOut);
+                log.info("[SpringBootShutdownHook] Ready to close configurableApplicationContext");
                 configurableApplicationContext.close();
                 log.info("[SpringBootShutdownHook] ApplicationContext closed, Application shutdown");
             } catch (InterruptedException e) {
