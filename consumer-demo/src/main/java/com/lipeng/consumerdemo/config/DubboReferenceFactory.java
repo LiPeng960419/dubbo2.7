@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ConsumerConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.ReferenceConfigBase;
@@ -44,9 +43,6 @@ public class DubboReferenceFactory {
     @Autowired
     private ConsumerConfig consumerConfig;
 
-    @Autowired
-    private ApplicationConfig applicationConfig;
-
     public <T> T getDubboBean(Class<T> dubboClasss, String dubboVersion) {
         return getDubboBean(dubboClasss, dubboVersion, null);
     }
@@ -70,8 +66,6 @@ public class DubboReferenceFactory {
         // 注意：ReferenceConfig为重对象，内部封装了与注册中心的连接，以及与服务提供方的连接
         // 引用远程服务
         ReferenceConfig<T> reference = new ReferenceConfig<T>();
-        // 当前应用配置
-        reference.setApplication(applicationConfig);
         // 消费端配置
         if (customConsumerConfig != null) {
             ConsumerConfig c = new ConsumerConfig();
