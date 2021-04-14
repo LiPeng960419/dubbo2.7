@@ -3,13 +3,10 @@ package com.lipeng.consumerdemo.config;
 import com.lipeng.common.utils.IpTraceUtils;
 import java.util.Arrays;
 import java.util.HashSet;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.ConsumerConfig;
 import org.apache.dubbo.config.ReferenceConfig;
-import org.apache.dubbo.config.ReferenceConfigBase;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.utils.ReferenceConfigCache;
 import org.springframework.beans.BeanUtils;
@@ -103,42 +100,42 @@ public class DubboReferenceFactory {
         return ips.contains(IpTraceUtils.getIp());
     }
 
-    @Data
-    @AllArgsConstructor
-    private static class CustomKeyGenerator implements ReferenceConfigCache.KeyGenerator {
-
-        private boolean isGray;
-
-        @Override
-        public String generateKey(ReferenceConfigBase<?> referenceConfig) {
-            String iName = referenceConfig.getInterface();
-            if (StringUtils.isBlank(iName)) {
-                Class<?> clazz = referenceConfig.getInterfaceClass();
-                iName = clazz.getName();
-            }
-
-            if (StringUtils.isBlank(iName)) {
-                throw new IllegalArgumentException("No interface info in ReferenceConfig" + referenceConfig);
-            } else {
-                StringBuilder ret = new StringBuilder();
-                if (!StringUtils.isBlank(referenceConfig.getGroup())) {
-                    ret.append(referenceConfig.getGroup()).append("/");
-                }
-
-                ret.append(iName);
-                if (!StringUtils.isBlank(referenceConfig.getVersion())) {
-                    ret.append(":").append(referenceConfig.getVersion());
-                }
-
-                if (isGray) {
-                    ret.append(":").append(ProfileEnum.GRAY.getCode());
-                } else {
-                    ret.append(":").append(ProfileEnum.PROD.getCode());
-                }
-
-                return ret.toString();
-            }
-        }
-    }
+//    @Data
+//    @AllArgsConstructor
+//    private static class CustomKeyGenerator implements ReferenceConfigCache.KeyGenerator {
+//
+//        private boolean isGray;
+//
+//        @Override
+//        public String generateKey(ReferenceConfig<?> referenceConfig) {
+//            String iName = referenceConfig.getInterface();
+//            if (StringUtils.isBlank(iName)) {
+//                Class<?> clazz = referenceConfig.getInterfaceClass();
+//                iName = clazz.getName();
+//            }
+//
+//            if (StringUtils.isBlank(iName)) {
+//                throw new IllegalArgumentException("No interface info in ReferenceConfig" + referenceConfig);
+//            } else {
+//                StringBuilder ret = new StringBuilder();
+//                if (!StringUtils.isBlank(referenceConfig.getGroup())) {
+//                    ret.append(referenceConfig.getGroup()).append("/");
+//                }
+//
+//                ret.append(iName);
+//                if (!StringUtils.isBlank(referenceConfig.getVersion())) {
+//                    ret.append(":").append(referenceConfig.getVersion());
+//                }
+//
+//                if (isGray) {
+//                    ret.append(":").append(ProfileEnum.GRAY.getCode());
+//                } else {
+//                    ret.append(":").append(ProfileEnum.PROD.getCode());
+//                }
+//
+//                return ret.toString();
+//            }
+//        }
+//    }
 
 }

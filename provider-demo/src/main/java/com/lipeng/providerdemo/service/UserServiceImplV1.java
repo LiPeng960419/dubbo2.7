@@ -9,7 +9,7 @@ import com.lipeng.common.vo.UserVo;
 import com.lipeng.providerdemo.filter.RedisRateLimitFilter;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.dubbo.config.annotation.Service;
 import org.apache.dubbo.rpc.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @Date: 2019/9/23 16:38
  */
 @Slf4j
-@DubboService(version = "1.0.0", parameters = {Constants.TPS_LIMIT_RATE_KEY, "1", Constants.TPS_LIMIT_INTERVAL_KEY, "2000", RedisRateLimitFilter.LIMIT_TIME, "30", RedisRateLimitFilter.LIMIT_COUNT, "5"})
+@Service(version = "1.0.0", parameters = {Constants.TPS_LIMIT_RATE_KEY, "1", Constants.TPS_LIMIT_INTERVAL_KEY, "2000", RedisRateLimitFilter.LIMIT_TIME, "30", RedisRateLimitFilter.LIMIT_COUNT, "5"})
 public class UserServiceImplV1 implements UserService {
 
     @Value("${server.port}")

@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,13 +37,13 @@ public class OrderController {
 
     如果注册中心使用nacos 不支持version
      */
-    @DubboReference(mock = "true", version = "*", stub = "com.lipeng.consumerdemo.service.UserServiceStub")
+    @Reference(mock = "true", version = "*", stub = "com.lipeng.consumerdemo.service.UserServiceStub")
     private UserService userService;
 
-    @DubboReference(mock = "true", version = "1.0.0", stub = "com.lipeng.consumerdemo.service.UserServiceStub")
+    @Reference(mock = "true", version = "1.0.0", stub = "com.lipeng.consumerdemo.service.UserServiceStub")
     private UserService userService1;
 
-    @DubboReference(mock = "true", version = "2.0.0", stub = "com.lipeng.consumerdemo.service.UserServiceStub")
+    @Reference(mock = "true", version = "2.0.0", stub = "com.lipeng.consumerdemo.service.UserServiceStub")
     private UserService userService2;
 
     @Autowired

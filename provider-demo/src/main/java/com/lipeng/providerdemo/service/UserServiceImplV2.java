@@ -7,7 +7,7 @@ import com.lipeng.common.mapstruct.UserMapper;
 import com.lipeng.common.vo.ResultVo;
 import com.lipeng.common.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @Date: 2019/9/23 16:38
  */
 @Slf4j
-@DubboService(version = "2.0.0")
+@Service(version = "2.0.0")
 public class UserServiceImplV2 implements UserService {
 
     @Value("${server.port}")
