@@ -12,10 +12,14 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({"com.lipeng.common", "com.lipeng.consumerdemo"})
 public class ConsumerDemoApplication {
 
+	/**
+	 * dubbo2.7 修复了dubbo优雅关闭
+	 * https://www.jianshu.com/p/69b704279066?utm_campaign=haruki&utm_content=note&utm_medium=reader_share&utm_source=weixin
+	 * https://my.oschina.net/yangzhongyu/blog/3048619
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(ConsumerDemoApplication.class);
-		app.setRegisterShutdownHook(false);
-		app.run(args);
+		new SpringApplication(ConsumerDemoApplication.class).run(args);
 	}
 
 }

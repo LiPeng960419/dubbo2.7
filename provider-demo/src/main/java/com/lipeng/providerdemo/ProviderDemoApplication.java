@@ -11,9 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class ProviderDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(ProviderDemoApplication.class);
-		app.setRegisterShutdownHook(false);
-		app.run(args);
+		new SpringApplication(ProviderDemoApplication.class).run(args);
 	}
 
 }
