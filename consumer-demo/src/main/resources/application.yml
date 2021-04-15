@@ -1,28 +1,28 @@
 dubbo:
   config:
     multiple: true
+  config-center:
+    timeout: 20000
   registries:
     prod:
       id: prod
-      address: 127.0.0.1:8500
-      protocol: consul
+      address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
+      protocol: zookeeper
       check: false
       default: true
-      timeout: 30000
     gray:
       id: gray
-      address: 127.0.0.1:8500
-      protocol: consul
+      address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
+      protocol: zookeeper
       check: false
-      timeout: 30000
   application:
     name: consumer-demo
-#  registry:
-#    address: 192.168.7.1:2181
-#    protocol: zookeeper
-#    #    address: 192.168.7.1:8848
-#    #    protocol: nacos
-#    check: true # true注册订阅失败时报错
+  #  registry:
+  #    address: 192.168.7.1:2181
+  #    protocol: zookeeper
+  #    #    address: 192.168.7.1:8848
+  #    #    protocol: nacos
+  #    check: true # true注册订阅失败时报错
   protocol:
     id: dubbo
     name: dubbo #协议名称
@@ -38,16 +38,14 @@ dubbo:
     filter: CustomConsumerSignFilter
     registries:
       - id: prod
-        address: 127.0.0.1:8500
-        protocol: consul
+        address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
+        protocol: zookeeper
         check: false
         default: true
-        timeout: 30000
       - id: gray
-        address: 127.0.0.1:8500
-        protocol: consul
+        address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
+        protocol: zookeeper
         check: false
-        timeout: 30000
   provider:
     timeout: 5000 #调用服务超时时间
     retries: 0 #远程服务调用重试次数，不包括第一次调用，不需要重试请设为0

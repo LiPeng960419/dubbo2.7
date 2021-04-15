@@ -1,3 +1,4 @@
+# consul的value长度最大为512 service参数过长导致无法注册上去  真是坑啊 dubbo2.7.4.1以及2.7.8
 dubbo:
   config:
     multiple: true

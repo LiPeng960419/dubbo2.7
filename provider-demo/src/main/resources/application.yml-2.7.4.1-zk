@@ -10,13 +10,11 @@ dubbo:
       protocol: zookeeper
       check: false
       default: true
-      timeout: 30000
     gray:
       id: gray
       address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
       protocol: zookeeper
       check: false
-      timeout: 30000
   application:
     name: provider-demo
     registries:
@@ -25,16 +23,14 @@ dubbo:
         protocol: zookeeper
         check: false
         default: true
-        timeout: 30000
       - id: gray
         address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
         protocol: zookeeper
         check: false
-        timeout: 30000
-#  registry:
-#    address: 127.0.0.1:8500
-#    protocol: consul
-#    check: false # true注册订阅失败时报错
+  #  registry:
+  #    address: 127.0.0.1:8500
+  #    protocol: consul
+  #    check: false # true注册订阅失败时报错
   protocol:
     id: dubbo
     name: dubbo #协议名称
