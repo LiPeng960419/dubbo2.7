@@ -1,20 +1,28 @@
 dubbo:
   config:
     multiple: true
+  metadata-report:
+    address: zookeeper://115.159.144.187:2181?backup=115.159.144.187:2182,115.159.144.187:2183
+    timeout: 20000
   config-center:
     timeout: 20000
+  registry:
+    simplified: true
+  #只为代码里获取配置用
   registries:
     prod:
       id: prod
-      address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
+      address: 127.0.0.1:2181
       protocol: zookeeper
       check: false
       default: true
+      timeout: 20000
     gray:
       id: gray
       address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
       protocol: zookeeper
       check: false
+      timeout: 20000
   application:
     name: consumer-demo
   #  registry:
@@ -35,17 +43,19 @@ dubbo:
     retries: 2 # 不包含第一次调用
     check: false # 启动时检查提供者是否存在，true报错，false忽略
     loadbalance: gray #负载均衡策略，可选值：random,roundrobin,leastactive，分别表示：随机，轮询，最少活跃调用
-    filter: CustomConsumerSignFilter
+    #消费者不能在外部配置多注册中心，只能在这里配置。单registry可以
     registries:
       - id: prod
-        address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
+        address: 127.0.0.1:2181
         protocol: zookeeper
         check: false
         default: true
+        timeout: 20000
       - id: gray
         address: 115.159.144.187:2181,115.159.144.187:2182,115.159.144.187:2183
         protocol: zookeeper
         check: false
+        timeout: 20000
   provider:
     timeout: 5000 #调用服务超时时间
     retries: 0 #远程服务调用重试次数，不包括第一次调用，不需要重试请设为0
