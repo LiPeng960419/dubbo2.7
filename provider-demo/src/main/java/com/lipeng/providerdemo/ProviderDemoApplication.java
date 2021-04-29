@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProviderDemoApplication {
 
+	/**
+	 * https://github.com/ctripcorp/apollo/issues/2702
+	 * dubbo2.7.4.1 集成Apollo 有bug
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new SpringApplication(ProviderDemoApplication.class).run(args);
 	}
