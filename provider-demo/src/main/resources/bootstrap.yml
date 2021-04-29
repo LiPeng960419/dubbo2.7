@@ -1,0 +1,8 @@
+#app:
+#  id: provider-demo
+#apollo:
+#  cacheDir: C:\\Users\\LiPeng\\IdeaProjects\\dubbo2.7\\
+#  meta: http://127.0.0.1:8080
+#  bootstrap:
+#    enable: true
+#    namespaces: application
